@@ -40,9 +40,10 @@ export const getAllReviews = async (req: express.Request, res: express.Response)
 // Get a review by ID
 export const getReviewById = async (req: express.Request, res: express.Response) => {
     try {
-        const { reviewId } = req.params;
-        const review = await ReviewModel.findById(reviewId);
-
+        const { id } = req.params;
+        const review = await ReviewModel.findById(id);
+        
+        console.log(review);
         if (!review) {
             return res.status(404).json({ error: 'Review not found' });
         }
