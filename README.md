@@ -1,15 +1,73 @@
 
 # TrialShopy Assignment
 
-Brief description of The project.
 
-## Table of Contents
+## Overview
 
-- [Authentication](#authentication)
-- [User Management](#user-management)
-- [Products](#products)
-- [Category](#category)
-- [Review](#review)
+This project is designed with a focus on secure authentication, category management, and user reviews. Below are key aspects explained briefly.
+
+### Authentication
+
+- **Middleware Usage:**
+  - `isAuthenticated`: Ensures that users are logged in before accessing certain routes.
+  - `isOwner`: Allows only the account owner to perform actions like updating or deleting user information.
+
+- **APIs:**
+  - `POST /auth/logout`: Logs out the authenticated user.
+
+### User Management
+
+- **Middleware Usage:**
+  - `isOwner`: Allows only the account owner to update or delete their account.
+
+- **APIs:**
+  - `DELETE /users/:id`: Deletes a user account, accessible only by the account owner.
+  - `PATCH /users/:id`: Updates user information, requires authentication and ownership.
+
+### Products
+
+- **Category Schema:**
+  - A separate category schema is used and referenced as a foreign key in the products schema.
+
+- **APIs:**
+  - `POST /product/addcategory`: Adds a category to a product, utilizing the category schema.
+
+### Review
+
+- **Review Schema:**
+  - A separate review schema is implemented with `productId` and `userId` as foreign keys.
+  - Responses to reviews include `reviewId` as a foreign key.
+
+- **APIs:**
+  - `POST /review/post`: Posts a new review.
+  - `POST /reviews/respond`: Responds to a review, referencing `reviewId`.
+
+---
+
+## Key Concepts
+
+- **Secure Authentication:**
+  - Middleware ensures that certain actions are performed only when users are logged in.
+
+- **Category Management:**
+  - A separate category schema is used, enhancing organization and referencing it in the products schema.
+
+- **Review System:**
+  - Reviews and responses are managed through a dedicated schema, maintaining structured relationships.
+
+---
+
+## GitHub Code
+
+Refer to the code on GitHub for detailed implementations:
+
+- [Authentication Middleware](link-to-auth-middleware)
+- [User Management](link-to-user-management)
+- [Products API](link-to-products-api)
+- [Category Schema](link-to-category-schema)
+- [Review Schema and APIs](link-to-review-schema-and-apis)
+
+---
 
 ## Authentication
 
