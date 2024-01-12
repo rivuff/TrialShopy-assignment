@@ -2,6 +2,7 @@ import product from "router/product";
 import { getProductByName, createProduct, getProducts, getProductById, deleteProductById, bulkUploadProducts } from "../db/products";
 import express from "express";
 
+// Controller function for creating a new product
 export const CreateProduct = async(req: express.Request, res: express.Response) =>{
     try {
         const {name, price,commision, category} = req.body;
@@ -37,6 +38,8 @@ export const CreateProduct = async(req: express.Request, res: express.Response) 
     }
 }
 
+
+// Controller function for toggling the status of a product between 'active' and 'blocked'
 export const toggleStatus = async (req: express.Request, res: express.Response) => {
     try {
         const { id } = req.params;
@@ -61,6 +64,8 @@ export const toggleStatus = async (req: express.Request, res: express.Response) 
     }
 };
 
+
+// Controller function for getting commission details for a product
 export const getCommissionForProduct = async (req: express.Request, res: express.Response) => {
     try {
         const { id } = req.params;
@@ -81,6 +86,7 @@ export const getCommissionForProduct = async (req: express.Request, res: express
 };
 
 
+// Controller function for updating commission details for a product
 export const updateCommissionForProduct = async (req: express.Request, res: express.Response) => {
     try {
         const { id, newCommission } = req.body;
@@ -105,6 +111,8 @@ export const updateCommissionForProduct = async (req: express.Request, res: expr
     }
 };
 
+
+// Controller function for getting all products
 export const GetAllProducts =async (req:express.Request, res:express.Response) => {
     try {
         const products = await getProducts();
@@ -116,6 +124,8 @@ export const GetAllProducts =async (req:express.Request, res:express.Response) =
     }
 }
 
+
+// Controller function for getting a product by name
 export const GetProductsByName =async (req:express.Request, res:express.Response) => {
     try {
         const { name } = req.body; 
@@ -137,6 +147,8 @@ export const GetProductsByName =async (req:express.Request, res:express.Response
     }
 }
 
+
+// Controller function for getting a product by ID
 export const GetProductsById =async (req:express.Request, res:express.Response) => {
     try {
         const {id} = req.params;
@@ -157,6 +169,8 @@ export const GetProductsById =async (req:express.Request, res:express.Response) 
     }
 }
 
+
+// Controller function for updating product details
 export const UpdateProduct = async(req:express.Request, res:express.Response)=>{
     try {
         const {id} = req.params;
@@ -191,6 +205,7 @@ export const UpdateProduct = async(req:express.Request, res:express.Response)=>{
 }
 
 
+// Controller function for deleting a product
 export const DeleteProduct =  async(req: express.Request, res: express.Response)=>{
     try {
         const {id} = req.params;
@@ -211,6 +226,9 @@ export const DeleteProduct =  async(req: express.Request, res: express.Response)
 }
 
 
+
+
+// Controller function for bulk uploading products
 export const BulkUploadProducts = async (req: express.Request, res: express.Response) => {
     try {
         const { products } = req.body;
@@ -228,6 +246,8 @@ export const BulkUploadProducts = async (req: express.Request, res: express.Resp
     }
 };
 
+
+// Controller function for adding a category to a product
 export const addCategoryToProduct = async (req: express.Request, res: express.Response) => {
     try {
         const { productId, categoryId } = req.body;

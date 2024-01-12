@@ -9,27 +9,40 @@ const ProductSchema = new mongoose.Schema({
         enum: ['active', 'blocked'],
         default: 'active',
     },
+
+    // Category reference, linking to the Category model
     category: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category', // Assuming your Category model is named 'Category'
     }],
 })
 
-export const ProductModel = mongoose.model('Product', ProductSchema)
+// Creating a Mongoose model for the Product schema
+export const ProductModel = mongoose.model('Product', ProductSchema);
 
-export const getProducts = async()=> await ProductModel.find();
+// Function to get all products
+export const getProducts = async () => await ProductModel.find();
 
+// Function to get product by ID
 export const getProductById = (id: string) => ProductModel.findById(id);
-export const getProductByName = (name: string) => ProductModel.findOne({ name })
+
+// Function to get product by name
+export const getProductByName = (name: string) => ProductModel.findOne({ name });
+
+// Function to create a new product
 export const createProduct = (values: Record<string, any>) => {
     const product = new ProductModel(values);
     return product.save().then((savedProduct) => savedProduct.toObject());
 };
+
+// Function to get products by category
 export const getProductsByCategory = (categoryId: mongoose.Schema.Types.ObjectId) =>
     ProductModel.find({ category: categoryId });
 
-export const deleteProductById = (id: string) => ProductModel.findOneAndDelete({_id: id});
+// Function to delete product by ID
+export const deleteProductById = (id: string) => ProductModel.findOneAndDelete({ _id: id });
 
+// Function to bulk upload products
 export const bulkUploadProducts = async (productsData: any[]) => {
     try {
         const insertedProducts = await ProductModel.insertMany(productsData);

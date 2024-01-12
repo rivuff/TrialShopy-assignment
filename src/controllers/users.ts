@@ -2,6 +2,8 @@ import express from 'express'
 
 import { deleteUserById, getUserById, getUsers } from '../db/users'
 
+
+//getting all the user
 export const getAllUsers =async (req:express.Request, res:express.Response) => {
     try {
         const users = await getUsers();
@@ -13,6 +15,8 @@ export const getAllUsers =async (req:express.Request, res:express.Response) => {
     }
 }
 
+
+//deleting user
 export const deleteUser =  async(req: express.Request, res: express.Response)=>{
     try {
         const {id} = req.params;
@@ -25,6 +29,8 @@ export const deleteUser =  async(req: express.Request, res: express.Response)=>{
     }
 }
 
+
+//updating user
 export const updateUser = async(req:express.Request, res:express.Response)=>{
     try {
         const {id} = req.params;

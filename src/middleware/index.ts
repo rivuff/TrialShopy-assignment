@@ -4,6 +4,8 @@ import get from 'lodash/get'
 import { getUserBySessionToken } from '../db/users'
 
 
+// Middleware to check if the user making the request is the owner of the account
+
 export const isOwner = async(req: express.Request, res: express.Response, next: express.NextFunction ) =>{
     try {
         const {id} = req.params;
@@ -24,6 +26,7 @@ export const isOwner = async(req: express.Request, res: express.Response, next: 
     }
 }
 
+// Middleware to check if the user making the request is authenticated
 
 export const isAuthenticated =async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {

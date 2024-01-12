@@ -1,6 +1,7 @@
 import express from 'express';
 import { CategoryModel } from '../db/categry';
 
+// Controller function for creating a new category
 export const createCategory = async (req: express.Request, res: express.Response) => {
     try {
         const { name, childCategories } = req.body;
@@ -14,6 +15,8 @@ export const createCategory = async (req: express.Request, res: express.Response
 };
 
 
+// Controller function for getting all categories
+
 export const getCategories = async (req: express.Request, res: express.Response) => {
     try {
         const categories = await CategoryModel.find();
@@ -24,6 +27,8 @@ export const getCategories = async (req: express.Request, res: express.Response)
     }
 };
 
+
+// Controller function for updating a category
 export const updateCategory = async (req: express.Request, res: express.Response) => {
     try {
         const { id } = req.params;
@@ -69,7 +74,7 @@ export const updateCategory = async (req: express.Request, res: express.Response
     }
 };
 
-
+// Controller function for deleting a category
 export const deleteCategory = async (req: express.Request, res: express.Response) => {
     try {
         const { id } = req.params;

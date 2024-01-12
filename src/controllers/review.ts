@@ -54,7 +54,7 @@ export const getReviewById = async (req: express.Request, res: express.Response)
     }
 };
 
-
+// responding to review
 export const respondToReview = async (req: express.Request, res: express.Response) => {
     try {
         const { reviewId, responseText, userId } = req.body;

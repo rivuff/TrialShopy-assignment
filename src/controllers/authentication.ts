@@ -1,8 +1,12 @@
 import { createUser, getUserByEmail } from '../db/users';
 import express from 'express'
 import {authentication, random} from '../helpers'
+import dotenv from 'dotenv';
 
+dotenv.config();
 
+const cookieKey = process.env.SESSIONkEY || '';
+// Controller function for user login
 export const login =  async(req: express.Request, res: express.Response) =>{
     try {
         const {email, password} = req.body;
@@ -23,10 +27,12 @@ export const login =  async(req: express.Request, res: express.Response) =>{
 
         let expectedHash;
 
+        // Checking if user has a salt for password hashing
         if(user.authentication?.salt !=undefined){
             console.log(user.authentication.salt);
             console.log(password);
-            
+           
+            // Generating the expected hash using the provided salt and password            
             expectedHash = authentication(user.authentication.salt, password)
             console.log(expectedHash);
             
@@ -34,13 +40,13 @@ export const login =  async(req: express.Request, res: express.Response) =>{
 
         //console.log(user.authentication?.password);
         
-        
+        // Comparing the expected hash with the stored password hash
         if(user.authentication?.password !== expectedHash){
             console.log("error at controller password not match");
             return res.sendStatus(403);
         }
 
-
+        // Generating a new session token
         const salt = random();
         if(user.authentication != undefined){
             user.authentication.sessionToken = authentication(salt, user._id.toString())
@@ -48,8 +54,9 @@ export const login =  async(req: express.Request, res: express.Response) =>{
 
          
         await user.save();
-
-        res.cookie('RIVU-AUTH', user.authentication?.sessionToken, { domain: 'localhost', path: '/'})
+        
+        // Setting the session token in a cookie
+        res.cookie(cookieKey, user.authentication?.sessionToken, { domain: 'localhost', path: '/'})
 
         return res.status(200).json(user).end();
 
@@ -61,6 +68,7 @@ export const login =  async(req: express.Request, res: express.Response) =>{
     }
 }
 
+// Controller function for user registration
 export const register = async(req: express.Request, res: express.Response) =>{
     try {
         const {email, password, username} = req.body;
@@ -98,6 +106,7 @@ export const register = async(req: express.Request, res: express.Response) =>{
     }
 }
 
+// Controller function for user logout
 export const logout = async (req: express.Request, res: express.Response) => {
     try {
         const {email} = req.body; // Assuming you have authentication middleware that sets req.user
@@ -113,7 +122,7 @@ export const logout = async (req: express.Request, res: express.Response) => {
         }
 
         // Clear the session token cookie
-        res.clearCookie('RIVU-AUTH', { domain: 'localhost', path: '/' });
+        res.clearCookie(cookieKey, { domain: 'localhost', path: '/' });
 
         return res.status(200).json("logged out");
     } catch (error) {
