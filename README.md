@@ -69,7 +69,7 @@ Refer to the code on GitHub for detailed implementations:
 
 ---
 
-## Need to add .env properties to run the function
+## Need to add .env properties to run the code
 -MongoURI,
 -SECRETKEY,
 -SESSIONkEY
