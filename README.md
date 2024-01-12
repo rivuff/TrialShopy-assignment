@@ -220,5 +220,3 @@ POST /reviews/respond
 ```
 
 Responds to a review.
-```
-
