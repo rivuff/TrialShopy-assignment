@@ -1,9 +1,7 @@
-Certainly! Below is the complete GitHub README template for describing API endpoints. Please replace the placeholder text with your actual API endpoint details and descriptions:
 
-```markdown
-# Project Name
+# TrialShopy Assignment
 
-Brief description of your project.
+Brief description of The project.
 
 ## Table of Contents
 
@@ -224,4 +222,3 @@ POST /reviews/respond
 Responds to a review.
 ```
 
-Feel free to customize this template further based on your project's specific needs.
